@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Philip Vu Health Tracker</title>
+<style>
+  :root { --bg: #ffffff; --fg: #1a1a1a; --muted: #5a5a5a; --line: #e2e2e2; --link: #0b5fbd; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14161a; --fg: #e8e8e8; --muted: #a3a3a3; --line: #2c2f35; --link: #7fb3ff; }
+  }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; margin: 0; padding: 48px 16px; }
+  main { max-width: 640px; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin: 0 0 .4rem; }
+  p.sub { color: var(--muted); margin: 0 0 2rem; }
+  a { color: var(--link); }
+  ul { padding-left: 1.2rem; }
+  footer { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Philip Vu Health Tracker</h1>
+  <p class="sub">A personal health tracking tool</p>
+
+  <p>This is a private tool built and used by one person, Philip Vu, to track his own fitness and nutrition data.</p>
+
+  <p>It reads health data from the Google Health API for a single account, the owner's own, and stores it locally on his own computer. It exists so that daily calorie, activity, sleep and weight figures can be viewed alongside a food log in one place.</p>
+
+  <p>What the tool reads</p>
+  <ul>
+    <li>Activity and fitness data such as calories burned, active zone minutes and steps</li>
+    <li>Health metrics such as weight, body fat, resting heart rate and heart rate variability</li>
+    <li>Sleep duration and sleep stages</li>
+    <li>Basic profile information</li>
+  </ul>
+
+  <p>Access is read only. The tool cannot create, change or delete any health data. It has no other users, no accounts, no sign up and no public interface.</p>
+
+  <footer>
+    <a href="privacy.html">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="terms.html">Terms of Service</a><br>
+    Contact philiphvu13 at gmail dot com
+  </footer>
+</main>
+</body>
+</html>
