@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Authorization Code</title>
+<style>
+  :root { --bg: #ffffff; --fg: #1a1a1a; --muted: #5a5a5a; --line: #e2e2e2; --ok: #0a7c42; --err: #b3261e; --chip: #f2f3f5; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #14161a; --fg: #e8e8e8; --muted: #a3a3a3; --line: #2c2f35; --ok: #5bd48c; --err: #ff8a80; --chip: #1e2127; }
+  }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; margin: 0; padding: 48px 16px; }
+  main { max-width: 620px; margin: 0 auto; }
+  h1 { font-size: 1.35rem; margin: 0 0 .5rem; }
+  p.sub { color: var(--muted); margin: 0 0 1.75rem; }
+  .code { background: var(--chip); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .95rem; word-break: break-all; }
+  button { margin-top: 14px; font: inherit; font-size: .95rem; padding: 9px 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--chip); color: var(--fg); cursor: pointer; }
+  button:hover { border-color: var(--muted); }
+  .ok { color: var(--ok); }
+  .err { color: var(--err); }
+  .note { color: var(--muted); font-size: .9rem; margin-top: 1.75rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Authorization Code</h1>
+  <p class="sub" id="status">Reading the code from this page's address</p>
+  <div class="code" id="code">nothing found</div>
+  <button id="copy">Copy code</button>
+  <p class="note">Paste this back into the chat. It is single use and expires in a few minutes.</p>
+</main>
+<script>
+  (function () {
+    var p = new URLSearchParams(window.location.search);
+    var code = p.get('code');
+    var err = p.get('error');
+    var statusEl = document.getElementById('status');
+    var codeEl = document.getElementById('code');
+
+    if (code) {
+      codeEl.textContent = code;
+      statusEl.textContent = 'Got it. Copy the code below.';
+      statusEl.className = 'sub ok';
+    } else if (err) {
+      codeEl.textContent = err;
+      statusEl.textContent = 'Authorization was refused or cancelled.';
+      statusEl.className = 'sub err';
+    } else {
+      statusEl.textContent = 'No code in the address. Open this page only by completing the Google authorization link.';
+      statusEl.className = 'sub err';
+    }
+
+    document.getElementById('copy').addEventListener('click', function () {
+      var btn = this;
+      navigator.clipboard.writeText(codeEl.textContent).then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy code'; }, 1800);
+      }).catch(function () {
+        btn.textContent = 'Copy failed, select it by hand';
+      });
+    });
+  })();
+</script>
+</main>
+</body>
+</html>
